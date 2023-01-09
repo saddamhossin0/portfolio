@@ -9,7 +9,7 @@
                         <h5 class="card-title">About Form Data</h5>
 
                         <!-- General Form Elements -->
-                        <form id="about_data">
+                        <form id="service_data">
                             @csrf
                             <div class="row mb-3">
                                 <label for="inputText" class="col-sm-2 col-form-label">Title</label>
@@ -25,15 +25,15 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                                <label for="inputText" class="col-sm-2 col-form-label">Service</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="file" name="about_img" id="about_img">
+                                    <input type="text" name="service" id="service" class="form-control">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Submit Button</label>
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Submit About</button>
+                                    <button type="submit" class="btn btn-primary">Submit Service</button>
                                 </div>
                             </div>
 
@@ -56,7 +56,7 @@
                                     <th scope="col">Id</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Image</th>
+                                    <th scope="col">Services</th>
                                     <th scope="col">Action</th>
 
                                 </tr>
@@ -83,10 +83,10 @@
     <script>
         aboutShow() ;
 
-            $(document).on('submit', '#about_data', function(event) {
+            $(document).on('submit', '#service_data', function(event) {
                 event.preventDefault();
 
-                let About_data = new FormData($('#about_data')[0]);
+                let About_data = new FormData($('#service_data')[0]);
 
                 $.ajaxSetup({
                     headers: {
@@ -95,12 +95,12 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: `/about/store/`,
+                    url: `/service/store/`,
                     data: About_data,
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        $("#about_data").trigger("reset");
+                        $("#service_data").trigger("reset");
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -119,7 +119,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: `/about/show/`,
+                    url: `/service/show/`,
                     success: function(response) {
                         var s = '';
                         var total = 1;
@@ -130,7 +130,7 @@
                                 <td><span class="footable-toggle"></span>${total++}</td>
                                 <td>${value.title}</td>
                                 <td>${value.name }</td>
-                                <td><img src="${value.about_image}" alt="" border=3 height=100 width=100></img></td>
+                                <td>${value.service }</td>
                                 <td>
                                     <a href='#'>Edit</a>
                                     <a href="#">Delete</a>

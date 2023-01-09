@@ -6,34 +6,35 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">About Form Data</h5>
+                        <h5 class="card-title">Portfolio Form Data</h5>
 
                         <!-- General Form Elements -->
-                        <form id="about_data">
+                        <form id="port_data">
                             @csrf
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Title</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="title" id="title" class="form-control">
-                                </div>
-                            </div>
+
                             <div class="row mb-3">
                                 <label for="inputText" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="name" id="name" class="form-control">
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="inputText" class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="description" id="description" class="form-control">
+                                </div>
+                            </div>
 
                             <div class="row mb-3">
                                 <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="file" name="about_img" id="about_img">
+                                    <input class="form-control" type="file" name="portfolio_img" id="portfolio_img">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Submit Button</label>
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Submit About</button>
+                                    <button type="submit" class="btn btn-primary">Submit Portfolio</button>
                                 </div>
                             </div>
 
@@ -48,14 +49,14 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">About Form Data</h5>
+                        <h5 class="card-title">Portfolio Form Data</h5>
 
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
-                                    <th scope="col">Title</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Action</th>
 
@@ -81,12 +82,11 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
     <script>
-        aboutShow() ;
+        portfolioShow() ;
 
-            $(document).on('submit', '#about_data', function(event) {
+            $(document).on('submit', '#port_data', function(event) {
                 event.preventDefault();
-
-                let About_data = new FormData($('#about_data')[0]);
+                let portfolio_data = new FormData($('#port_data')[0]);
 
                 $.ajaxSetup({
                     headers: {
@@ -95,12 +95,12 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: `/about/store/`,
-                    data: About_data,
+                    url: `/portfolio/store/`,
+                    data: portfolio_data,
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        $("#about_data").trigger("reset");
+                        $("#port_data").trigger("reset");
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -108,18 +108,18 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-                        aboutShow();
+                        portfolioShow();
 
                     },
                 });
             });
 
 
-            function aboutShow() {
+            function portfolioShow() {
 
                 $.ajax({
                     type: "GET",
-                    url: `/about/show/`,
+                    url: `/portfolio/show/`,
                     success: function(response) {
                         var s = '';
                         var total = 1;
@@ -128,8 +128,8 @@
                             s += `
                             <tr style="" class="footable-even">
                                 <td><span class="footable-toggle"></span>${total++}</td>
-                                <td>${value.title}</td>
                                 <td>${value.name }</td>
+                                <td>${value.description }</td>
                                 <td><img src="${value.about_image}" alt="" border=3 height=100 width=100></img></td>
                                 <td>
                                     <a href='#'>Edit</a>

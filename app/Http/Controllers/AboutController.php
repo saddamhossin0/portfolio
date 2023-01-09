@@ -28,7 +28,9 @@ class AboutController extends Controller
         $about->save();
         return response($about);
 
-
-
+    }
+    public function Show(){
+        $about_show = About::all();
+        return response($about_show);
     }
 }

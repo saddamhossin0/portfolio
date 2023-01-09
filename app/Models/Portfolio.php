@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class About extends Model
+class Portfolio extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,6 @@ class About extends Model
 
 
     public function getAboutImageAttribute(){
-        return url('public/image/'.$this->about_img);
+        return url('public/image/'.$this->portfolio_img);
     }
-
 }

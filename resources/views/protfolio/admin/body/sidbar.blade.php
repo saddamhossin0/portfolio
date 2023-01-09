@@ -40,8 +40,8 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Form Elements</span>
+            <a href="{{route('service.view')}}">
+              <i class="bi bi-circle"></i><span>Service Add</span>
             </a>
           </li>
           <li>
@@ -67,8 +67,8 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>Chart.js</span>
+            <a href="{{route('portfolio.view')}}">
+              <i class="bi bi-circle"></i><span>POrtfolio Add</span>
             </a>
           </li>
           <li>
@@ -90,8 +90,8 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+            <a href="{{route('contact.view')}}">
+              <i class="bi bi-circle"></i><span>Contact Add</span>
             </a>
           </li>
           <li>

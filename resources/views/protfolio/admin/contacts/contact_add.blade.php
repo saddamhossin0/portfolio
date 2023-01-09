@@ -6,34 +6,40 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">About Form Data</h5>
+                        <h5 class="card-title">Contact Form Data</h5>
 
                         <!-- General Form Elements -->
-                        <form id="about_data">
+                        <form id="contact_data">
                             @csrf
                             <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Title</label>
+                                <label for="inputText" class="col-sm-2 col-form-label">Full Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="title" id="title" class="form-control">
+                                    <input type="text" name="full_name" id="full_name" class="form-control">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                                <label for="inputText" class="col-sm-2 col-form-label">Phone</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" id="name" class="form-control">
+                                    <input type="text" name="phone" id="phone" class="form-control">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                                <label for="inputText" class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="file" name="about_img" id="about_img">
+                                    <input type="text" name="email" id="email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputText" class="col-sm-2 col-form-label">Messages</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="messages" id="messages" class="form-control">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Submit Button</label>
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Submit About</button>
+                                    <button type="submit" class="btn btn-primary">Submit Service</button>
                                 </div>
                             </div>
 
@@ -54,9 +60,10 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Image</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Messages</th>
                                     <th scope="col">Action</th>
 
                                 </tr>
@@ -81,12 +88,12 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
     <script>
-        aboutShow() ;
+        contactShow() ;
 
-            $(document).on('submit', '#about_data', function(event) {
+            $(document).on('submit', '#contact_data', function(event) {
                 event.preventDefault();
 
-                let About_data = new FormData($('#about_data')[0]);
+                let About_data = new FormData($('#contact_data')[0]);
 
                 $.ajaxSetup({
                     headers: {
@@ -95,12 +102,12 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: `/about/store/`,
+                    url: `/contact/store/`,
                     data: About_data,
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        $("#about_data").trigger("reset");
+                        $("#contact_data").trigger("reset");
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -108,18 +115,18 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-                        aboutShow();
+                        contactShow();
 
                     },
                 });
             });
 
 
-            function aboutShow() {
+            function contactShow() {
 
                 $.ajax({
                     type: "GET",
-                    url: `/about/show/`,
+                    url: `/contact/show/`,
                     success: function(response) {
                         var s = '';
                         var total = 1;
@@ -128,9 +135,10 @@
                             s += `
                             <tr style="" class="footable-even">
                                 <td><span class="footable-toggle"></span>${total++}</td>
-                                <td>${value.title}</td>
-                                <td>${value.name }</td>
-                                <td><img src="${value.about_image}" alt="" border=3 height=100 width=100></img></td>
+                                <td>${value.full_name}</td>
+                                <td>${value.phone }</td>
+                                <td>${value.email }</td>
+                                <td>${value.messages }</td>
                                 <td>
                                     <a href='#'>Edit</a>
                                     <a href="#">Delete</a>
